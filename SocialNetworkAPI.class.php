@@ -11,7 +11,6 @@ require_once 'UserToken.class.php';
 require_once 'User.class.php';
 require_once 'Comment.class.php';
 require_once 'Post.class.php';
-require_once 'Recipe.class.php';
 require_once 'Notification.class.php';
 
 class SocialNetworkAPI extends API{
