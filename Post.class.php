@@ -27,6 +27,8 @@ class Post{
     //create an instance of the User class so we can get user data for each post
     $this->User = new User();
   }
+
+
   public function getUserPosts($userID){ 
     /*
      * This method takes in a $userID and gets all the "posts" created by that user.
@@ -78,7 +80,6 @@ class Post{
         //The postUserData only needs to contain the userID, firstName and lastName so 
         //we call the getUserProfile method now storing the result in $postUserData and then filter it below
         $postUserData = $this->User->getUserProfile($value['postUserID']);
-        
         array_push(
           $userFriendsPosts, array(
             'postID' => $value['postID'],
