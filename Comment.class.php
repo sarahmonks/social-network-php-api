@@ -1,10 +1,10 @@
 <?php
 /*
- * A class for working with comment data (related to posts).
+ * A class for working with Comment data (related to posts).
  */
 class Comment{
 	
-	private $DatabaseConnection;// stores the database handler
+  private $DatabaseConnection;// stores the database handler
   private $ErrorHandler;
   private $Validator;
   protected $commentID; 
@@ -15,16 +15,15 @@ class Comment{
   protected $commentUserData; //each comment will have data related to the user who generated the comment
   protected $commentsData = array();
 
-	public function __construct(){
-		$this->DatabaseConnection = DatabaseConnection::getInstance();
+  public function __construct(){
+    $this->DatabaseConnection = DatabaseConnection::getInstance();
     $this->ErrorHandler = new ErrorHandler("Comment");
     //Create an instance of the Validator class so we can validate the commentText so it is more secure.
     $this->Validator = new Validator();
-	}
-	public function getComments($postID){ 
-
+  }
+  public function getComments($postID){ 
     date_default_timezone_set('Europe/London'); //will have to change this timezone if there are international users of the app.
-	  $this->postID = $postID;
+    $this->postID = $postID;
     foreach($this->DatabaseConnection->getComments($postID) as $key => $value){  
       array_push(
         $this->commentsData, array(
@@ -36,8 +35,8 @@ class Comment{
         )
       ); 
     }
-		return $this->commentsData;
-	}
+    return $this->commentsData;
+  }
   public function getCommentUserData($commentUserID){ 
     /*
      * The purpose of this method is to preapre the user data associated with a comment on a post.
@@ -53,9 +52,6 @@ class Comment{
     $this->commentUserData['profileImgUrl'] = "http://localhost/my_app_images/" . $userProfileData['profileImgUrl'];
     return $this->commentUserData;
   }
-
-
-
 }
 
 ?>

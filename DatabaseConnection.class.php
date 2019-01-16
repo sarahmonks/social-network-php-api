@@ -245,7 +245,8 @@ class DatabaseConnection{
     }
     public function getUserPosts($userID){
         /* 
-         * This method gets all posts from the posts table for a particular user
+         * This method gets all posts from the posts table for a particular user.
+         * We user ORDER BY postID descending so that the most recent post created will be at the start of the array that is output.
          */
         $postsData = array();
         try{
