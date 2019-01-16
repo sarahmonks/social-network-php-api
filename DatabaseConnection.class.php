@@ -28,13 +28,14 @@ class DatabaseConnection{
         $this->Validator = new Validator();
     }
 
+
     public static function getInstance(){
         if(!isset(self::$instance)){ // Check if the instance is not set.
             //create a new DatabaseConnection instance which will execute the code in the above constructor.			
             self::$instance = new DatabaseConnection();	
         }
         return self::$instance;	
-	}
+    }
 
    
     public function checkEmailForLogin($emailAddress){
@@ -75,6 +76,7 @@ class DatabaseConnection{
         }   
     }
 
+
     public function checkBrute($userID) {
        /* 
         * This method takes in a userID as a parameter.
@@ -108,6 +110,8 @@ class DatabaseConnection{
             throw new Exception("Error checking user credentials!"); 
         }
     }
+
+
     public function recordFailedLoginAttempt($userID) {
        /* 
         * This method takes in a userID as a parameter.
@@ -128,6 +132,7 @@ class DatabaseConnection{
             throw new Exception("Error checking user credentials!"); 
         }
     }
+
 
     public function checkEmailExists($emailAddress){
         /* 
@@ -154,6 +159,7 @@ class DatabaseConnection{
         }  
     }
 
+
     public function insertUser($emailAddress, $password, $username){
         /* 
          * This method takes in an emailAddress, password, username as parameters and inserts a row into the users table of the database.
@@ -178,7 +184,8 @@ class DatabaseConnection{
         }
     }
     
-     public function getUserProfile($userID){
+
+    public function getUserProfile($userID){
         /* 
          * This method takes in a userID as a parameter and gets that user's profile data from the users table in the database
          */
@@ -243,6 +250,8 @@ class DatabaseConnection{
             throw new Exception("Error getting user email");
         }   
     }
+
+
     public function getUserPosts($userID){
         /* 
          * This method gets all posts from the posts table for a particular user.
@@ -268,6 +277,8 @@ class DatabaseConnection{
             throw new Exception("Error getting posts");
         }   
     }
+
+
     public function getPostLikes($postID){
         /* 
          * This method gets all likes from the post_likes table for a particular post
@@ -319,6 +330,7 @@ class DatabaseConnection{
         }   
     }
 
+
     public function checkIfUserLikesPost($userID, $postID) {
        /* 
         * This method checks if a user likes a particular post.
@@ -367,6 +379,8 @@ class DatabaseConnection{
             throw new Exception("Error adding like");
         }
     }
+
+
     public function unlikePost($userID, $postID){
         /*
          * This method takes in a userID and a postID and deletes the corresponding row of the post_likes table.
@@ -383,6 +397,7 @@ class DatabaseConnection{
             throw new Exception("Error deleting like");
         }
     }
+
 
     public function getFriends($userID){
         /* 
