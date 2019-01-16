@@ -1,6 +1,6 @@
 <?php
 /*
- * A class for working with post data (i.e posts created by users within the application).
+ * A class for working with Post data (i.e posts created by users within the application).
  */
 class Post{
 	
