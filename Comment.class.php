@@ -41,6 +41,7 @@ class Comment{
         $commentsData, array(
           'commentID' => $value['commentID'],
           'commentText' => $this->Validator->cleanUserInput($value['commentText']),
+          //convert the commentTime to a date (as it is stored as a unix timestamp)
           'commentTime' => date("jS F Y H:i", $value['commentTime']), 
           'commentUserData' => $this->getCommentUserData($value['commentUserID']),
           'postID' => $value['postID']
