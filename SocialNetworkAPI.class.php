@@ -1,5 +1,12 @@
 <?php
+/**
+ * This class extends our API class.
+ * It contains all of our custom endpoints
+ */
+//require the config file which contains necessary passwords and keys and is stored privately on the server.
 require_once 'config.php';
+
+//require all of our class files.
 require_once 'API.class.php';
 require_once 'ErrorHandler.class.php';
 require_once 'Validator.class.php';
@@ -10,19 +17,20 @@ require_once 'JWT.class.php';
 require_once 'UserToken.class.php';
 require_once 'User.class.php';
 require_once 'Comment.class.php';
+//make sure to include our Post class after our Comment class as we will create an instance of the Comment class within the Post class.
 require_once 'Post.class.php';
 require_once 'Notification.class.php';
 
 class SocialNetworkAPI extends API{
-
-    protected $Validator;
     protected $requestOrigin;
+    //declare variables which will store instances of our classes.
+    protected $Validator;
     protected $ErrorHandler;
     protected $UserToken;
     protected $User; 
     protected $Post;
     protected $Comment;
-
+    protected $Notification;
 
     public function __construct($request, $origin){
         //This contructor takes in the super global $_REQUEST array as a parameter which should contain a request and apiKey index
@@ -35,14 +43,14 @@ class SocialNetworkAPI extends API{
         //create an instance of the APIKey class, passing in the company APIkey defined in our config file to the constructor
         $APIKey = new APIKey(COMPANYAPIKEY);
 
-      
+        //Handle the case where no apiKey is provided in the url and if there IS and apiKey parameter then check if it matched the COMPANYAPIKEY 
         if (!array_key_exists('apiKey', $request)) {
-          //  throw new Exception('No API Key provided');
+          //throw new Exception('No API Key provided');
         }elseif(!$APIKey->verifyKey($request['apiKey'])){
-
-         //   throw new Exception('Invalid API Key');
+          //throw new Exception('Invalid API Key');
         }
-        $this->ErrorHandler = new ErrorHandler("MyAPI");
+        //create an instance of the ErrorHandler class so we can log errors
+        $this->ErrorHandler = new ErrorHandler("SocialNetworkAPI");
     }
 
    /**
@@ -208,12 +216,15 @@ class SocialNetworkAPI extends API{
      */
     protected function userProfile(){
         if ($this->method == 'GET'){
+            //userID will be the first argument of the endpoint URI.
             $userID = $this->args[0];
-
+            //Declare an empty array called data to store the data that we will output.
             $data = array(); 
 
-            //Create instances of our classes.
+            //Create an instance of the User class.
             $this->User = new User();
+            //Call the getUserProfile method from the User class passing in the userID we received as a parameter.
+            //Store the result (which will be an array) in data.
             $data = $this->User->getUserProfile($userID);
             return $data;
         }else{
@@ -227,11 +238,12 @@ class SocialNetworkAPI extends API{
      */
     protected function userEmail(){
         if ($this->method == 'GET'){
+            //userID will be the first argument of the endpoint URI.
             $userID = $this->args[0];
-
-
-            //Create instances of our classes.
+            //Create an instance of the User class.
             $this->User = new User();
+            //Call the getUserEmail method from the User class passing in the userID we received as a parameter.
+            //Store the result (which will be an email address) in a variable called email.
             $email = $this->User->getUserEmail($userID);
             return $email;
         }else{
@@ -249,6 +261,7 @@ class SocialNetworkAPI extends API{
         if ($this->method == 'GET'){
             //userID will be the first argument of the endpoint URI.
             $userID = $this->args[0];
+            //userToken will be the second argument of the endpoint URI.
             $userToken = $this->args[1];
             //Create an instance of the UserToken class.
             $this->UserToken = new UserToken();
