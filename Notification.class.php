@@ -19,7 +19,7 @@
  */
 
 class Notification{
-	protected $oneSignalNotificationID;
+  protected $oneSignalNotificationID;
   protected $url = "https://onesignal.com/api/v1/notifications"; //the url where the POST request will be sent
   protected $appID = ONESIGNALAPPID; //our one signal app ID which we received when we set up our app on onesignal.com
   protected $headings = array(); //the headings of the notification to display to user
@@ -29,9 +29,9 @@ class Notification{
   protected $fields = array(); //the fields to be sent in the POST request
   protected $numberOfRecipients = null;
 
-	public function __construct(){
+  public function __construct(){
 
-	}
+  }
 
 
   public function generateNotification($headings, $contents, $additionalData, $playerIDs){
