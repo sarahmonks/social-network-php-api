@@ -32,7 +32,16 @@ class Notification{
 	public function __construct(){
 
 	}
+
+
   public function generateNotification($headings, $contents, $additionalData, $playerIDs){
+    /*
+     * This method takes in $headings, $contents, $additionalData and $playerIDs arrays.
+     * We use curl to make a post request to the OneSignal API sending the data that is required to generate a notification.
+     * As a response to the request we get the id of the notification and also how many recipients there were. 
+     * e.g {"id":"d92b9a83-fe0b-4ad9-9121-159a01fefd32","recipients":1,"external_id":null}
+     * We return the notification id from this method.
+     */
     $fields = array(
       'app_id' => $this->appID,
       'include_player_ids' => $playerIDs,
@@ -51,11 +60,10 @@ class Notification{
     curl_setopt($ch, CURLOPT_POST, TRUE);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-    //as a response we get the id of the notification and also how many recipients there were. 
-    //e.g {"id":"d92b9a83-fe0b-4ad9-9121-159a01fefd32","recipients":1,"external_id":null}
+
     //we may want to create a log file to log theses responses
     $response = curl_exec($ch);
-    //in order to convert the response string to an array we do the following:
+    //convert the response string to an array so that we can get the individual properties of the response
     $responseArray = json_decode($response);  
     foreach($responseArray as $obj){ 
      // var_dump($obj);
