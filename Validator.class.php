@@ -26,12 +26,10 @@ class Validator{
          * We will use this in the checkInputIsValid method of this class.
          */
         $inputLength = mb_strlen($inputArray["input"], 'utf8');
-        if($inputLength >= $inputArray["minLength"] && $inputLength <= $inputArray["maxLength"]){ 
-       
+        if($inputLength >= $inputArray["minLength"] && $inputLength <= $inputArray["maxLength"]){        
             //The length of the input is valid.
             return true;		
-        }else{
-         
+        }else{         
             return false;	
         }
     }
@@ -49,12 +47,10 @@ class Validator{
             $isValidLength = $this->checkLengthIsValid($inputArray);
             if($isValidLength){
                 return true;
-            }else{
-              
+            }else{ 
                 return false;
             }
         }else{
-         
             //input is not valid utf-8 encoding.
             return false;
         }
