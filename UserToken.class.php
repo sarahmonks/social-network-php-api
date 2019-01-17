@@ -8,7 +8,7 @@ class UserToken{
     private $tokenArray = array();
     private $userToken;
     private $emailAddress;
-    private $userID = null;  
+    private $userID = null; //initialize userID to null 
    // private $userPrivilegeID;
 
 
@@ -18,8 +18,8 @@ class UserToken{
 
     public function createUserToken($userID, $emailAddress){
         /*
-         * This method creates a JSON Web Token with a userID of a user.
-         * We first store our userID in the token array which we then encrypt with the JWT class.
+         * This method creates a JSON Web Token with a userID and emailAddress of a user.
+         * We first store our userID and emailAddress variables in the token array which we then encrypt with the JWT class.
          */
         $this->userID = $userID;
         $this->emailAddress = $emailAddress;
@@ -33,7 +33,7 @@ class UserToken{
         /*
          * This method takes in a userToken and checks to see if it is a valid token.
          * We return the userID that was stored in the userToken.
-         * If the userToken is not valid then the userID returned will be null.
+         * If the userToken is not valid then the userID will be null (as we initialized it to null).
          */
         $this->userToken = $userToken;
         $this->tokenArray = JWT::decode($this->userToken, 'secret_server_key');
